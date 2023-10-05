@@ -1,0 +1,47 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model UserTask.Models.TaskListModel
+}
+
+<div>
+    <span style="float:right">
+        @Html.ActionLink("create", "Create", "Task", null, new { @class="btn btn-info" })
+    </span>
+    <table class="table table-striped table-light">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>DueDate</th>
+                <th>Prioritylevel</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        @foreach(var item in Model.taskModels)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Description</td>
+                @if (@item.DueDate != null)
+                {
+                    <td>@item.DueDate.Value.ToString("dd.MM.yyyy")</td>
+                } 
+                else
+                {
+                   <td></td> 
+                }
+                <td>@item.PriorityLevelDescripton</td>
+                <td>@item.StatusDescripton</td>
+                <td>
+                    <div class="btn-group">
+                        @Html.ActionLink("edit", "Edit", "Task", new { id = @item.Id }, new { @class="btn btn-info mx-1" })<br />
+                        @Html.ActionLink("delete", "Delete", "Task", new { id = @item.Id }, new { @class="btn btn-info mx-1" })
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

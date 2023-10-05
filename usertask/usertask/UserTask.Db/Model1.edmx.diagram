@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d6c9698f1b0644fdae570755f87ed55d" Name="Diagram1">
+        <EntityTypeShape EntityType="usertaskModel.Priority_level" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="usertaskModel.Task" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="usertaskModel.Task_status" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="usertaskModel.Users" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <AssociationConnector Association="usertaskModel.FK__task__t_priority__0DAF0CB0" ManuallyRouted="false" />
+        <AssociationConnector Association="usertaskModel.FK__task__t_status__0EA330E9" ManuallyRouted="false" />
+        <AssociationConnector Association="usertaskModel.FK__task__t_user_id__0F975522" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

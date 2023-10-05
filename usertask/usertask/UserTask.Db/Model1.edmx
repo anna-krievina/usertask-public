@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="usertaskModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Priority_level">
+          <Key>
+            <PropertyRef Name="t_id" />
+          </Key>
+          <Property Name="t_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="t_status" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="t_id" />
+          </Key>
+          <Property Name="t_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="t_title" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="t_description" Type="varchar" MaxLength="200" />
+          <Property Name="t_due_date" Type="date" />
+          <Property Name="t_priority_level" Type="int" Nullable="false" />
+          <Property Name="t_status" Type="int" Nullable="false" />
+          <Property Name="t_user_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Task_status">
+          <Key>
+            <PropertyRef Name="t_id" />
+          </Key>
+          <Property Name="t_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="t_status" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="t_id" />
+          </Key>
+          <Property Name="t_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="t_username" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="t_password" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__task__t_priority__0DAF0CB0">
+          <End Role="Priority_level" Type="Self.Priority_level" Multiplicity="1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Priority_level">
+              <PropertyRef Name="t_id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="t_priority_level" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__task__t_status__0EA330E9">
+          <End Role="Task_status" Type="Self.Task_status" Multiplicity="1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task_status">
+              <PropertyRef Name="t_id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="t_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__task__t_user_id__0F975522">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="t_id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="t_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="usertaskModelStoreContainer">
+          <EntitySet Name="Priority_level" EntityType="Self.Priority_level" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task_status" EntityType="Self.Task_status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__task__t_priority__0DAF0CB0" Association="Self.FK__task__t_priority__0DAF0CB0">
+            <End Role="Priority_level" EntitySet="Priority_level" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK__task__t_status__0EA330E9" Association="Self.FK__task__t_status__0EA330E9">
+            <End Role="Task_status" EntitySet="Task_status" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK__task__t_user_id__0F975522" Association="Self.FK__task__t_user_id__0F975522">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="usertaskModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Priority_level">
+          <Key>
+            <PropertyRef Name="t_id" />
+          </Key>
+          <Property Name="t_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="t_status" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Task" Relationship="Self.FK__task__t_priority__0DAF0CB0" FromRole="Priority_level" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="t_id" />
+          </Key>
+          <Property Name="t_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="t_title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="t_description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="t_due_date" Type="DateTime" Precision="0" />
+          <Property Name="t_priority_level" Type="Int32" Nullable="false" />
+          <Property Name="t_status" Type="Int32" Nullable="false" />
+          <Property Name="t_user_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Priority_level" Relationship="Self.FK__task__t_priority__0DAF0CB0" FromRole="Task" ToRole="Priority_level" />
+          <NavigationProperty Name="Task_status" Relationship="Self.FK__task__t_status__0EA330E9" FromRole="Task" ToRole="Task_status" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__task__t_user_id__0F975522" FromRole="Task" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Task_status">
+          <Key>
+            <PropertyRef Name="t_id" />
+          </Key>
+          <Property Name="t_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="t_status" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Task" Relationship="Self.FK__task__t_status__0EA330E9" FromRole="Task_status" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="t_id" />
+          </Key>
+          <Property Name="t_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="t_username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="t_password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Task" Relationship="Self.FK__task__t_user_id__0F975522" FromRole="Users" ToRole="Task" />
+        </EntityType>
+        <Association Name="FK__task__t_priority__0DAF0CB0">
+          <End Role="Priority_level" Type="Self.Priority_level" Multiplicity="1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Priority_level">
+              <PropertyRef Name="t_id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="t_priority_level" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__task__t_status__0EA330E9">
+          <End Role="Task_status" Type="Self.Task_status" Multiplicity="1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task_status">
+              <PropertyRef Name="t_id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="t_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__task__t_user_id__0F975522">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="t_id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="t_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="usertaskEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Priority_level" EntityType="Self.Priority_level" />
+          <EntitySet Name="Task" EntityType="Self.Task" />
+          <EntitySet Name="Task_status" EntityType="Self.Task_status" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK__task__t_priority__0DAF0CB0" Association="Self.FK__task__t_priority__0DAF0CB0">
+            <End Role="Priority_level" EntitySet="Priority_level" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK__task__t_status__0EA330E9" Association="Self.FK__task__t_status__0EA330E9">
+            <End Role="Task_status" EntitySet="Task_status" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK__task__t_user_id__0F975522" Association="Self.FK__task__t_user_id__0F975522">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="usertaskModelStoreContainer" CdmEntityContainer="usertaskEntities">
+          <EntitySetMapping Name="Priority_level">
+            <EntityTypeMapping TypeName="usertaskModel.Priority_level">
+              <MappingFragment StoreEntitySet="Priority_level">
+                <ScalarProperty Name="t_id" ColumnName="t_id" />
+                <ScalarProperty Name="t_status" ColumnName="t_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Task">
+            <EntityTypeMapping TypeName="usertaskModel.Task">
+              <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="t_id" ColumnName="t_id" />
+                <ScalarProperty Name="t_title" ColumnName="t_title" />
+                <ScalarProperty Name="t_description" ColumnName="t_description" />
+                <ScalarProperty Name="t_due_date" ColumnName="t_due_date" />
+                <ScalarProperty Name="t_priority_level" ColumnName="t_priority_level" />
+                <ScalarProperty Name="t_status" ColumnName="t_status" />
+                <ScalarProperty Name="t_user_id" ColumnName="t_user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Task_status">
+            <EntityTypeMapping TypeName="usertaskModel.Task_status">
+              <MappingFragment StoreEntitySet="Task_status">
+                <ScalarProperty Name="t_id" ColumnName="t_id" />
+                <ScalarProperty Name="t_status" ColumnName="t_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="usertaskModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="t_id" ColumnName="t_id" />
+                <ScalarProperty Name="t_username" ColumnName="t_username" />
+                <ScalarProperty Name="t_password" ColumnName="t_password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
